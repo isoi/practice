@@ -8,7 +8,7 @@
 
 #import "MasterViewController.h"
 
-#import "DetailViewController.h"
+#import <Foundation/Foundation.h>
 
 @interface MasterViewController () {
     NSMutableArray *_objects;
@@ -21,9 +21,35 @@
 {
     [super awakeFromNib];
 }
-
-- (void)viewDidLoad
+// viewDidLoad内でUIToolbarを設定する
+-(void)viewDidLoad{
+    
+    // toolbarの表示をONにする
+    [self.navigationController setToolbarHidden:NO animated:NO];
+    
+    // toolbarを黒色にする
+    self.navigationController.toolbar.tintColor = [UIColor blackColor];
+    
+    // スペーサを生成する
+    UIBarButtonItem *spacer = [[UIBarButtonItem alloc]
+                               initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                               target:nil action:nil];
+    
+    // ボタン「Hoge」を生成する
+    UIBarButtonItem *button = [[UIBarButtonItem alloc]
+                               initWithTitle:@"camera" style:UIBarButtonItemStyleBordered
+                               target:self action:@selector(hoge)];
+    
+    
+    // toolbarにボタンとラベルをセットする
+    NSArray *items =
+    [NSArray arrayWithObjects:spacer, button, spacer, spacer, nil];
+    self.toolbarItems = items;
+    
+}
+/*- (void)viewDidLoad
 {
+ 
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
@@ -46,7 +72,7 @@
     [_objects insertObject:[NSDate date] atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-}
+}*/
 
 #pragma mark - Table View
 
@@ -57,15 +83,72 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _objects.count;
+    // return _objects.count;
+    
+    /* 今の時刻を取得する */
+    
+    NSDate *now = [NSDate date];
+    
+    /* NSCalendarを取得する */
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier: NSGregorianCalendar];;
+    
+    NSInteger daysOfThisMonth = [ calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:now ].length;
+    
+    return daysOfThisMonth;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    UIView *backgroundView = [[UIView alloc] init];
+    backgroundView.backgroundColor = [UIColor greenColor];
+    cell.selectedBackgroundView = backgroundView;
+                                   
+    /* 今の時刻を取得する */
+    NSDate *now = [NSDate date];
+       
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSUInteger flags;
+    NSDateComponents *comps;
+    
+    // 年・月・日を取得
+    flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+    comps = [calendar components:flags fromDate:now];
+    
+    NSInteger year = comps.year;
+    NSInteger month = comps.month;
+    NSInteger today = comps.day;
+    NSInteger day = (indexPath.row) + 1;
+    
+    
+    
+    
 
-    NSDate *object = _objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    // 曜日
+    [comps setDay:1];
+    NSDate *date = [calendar dateFromComponents:comps];
+    comps = [calendar components:NSWeekdayCalendarUnit fromDate:date];
+    NSInteger firstWeekday = [comps weekday] - 1;
+    
+    NSInteger weekday = (firstWeekday + (indexPath.row)) % 7;
+    
+    NSString *arr_week[] = {@"日", @"月", @"火", @"水", @"木", @"金", @"土"};
+    NSString *youbi = arr_week[weekday];
+     
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"%d/%d/%d(%@)", year, month, day, youbi];
+    
+    
+    if(indexPath.row == today){
+        UIColor *color = [UIColor colorWithRed:1.0 green:0.647 blue:0.0 alpha:1.0];
+        cell.contentView.backgroundColor = color;
+    }
     return cell;
 }
 
@@ -101,13 +184,5 @@
 }
 */
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = _objects[indexPath.row];
-        [[segue destinationViewController] setDetailItem:object];
-    }
-}
 
 @end
