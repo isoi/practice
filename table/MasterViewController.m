@@ -110,6 +110,7 @@
     backgroundView.backgroundColor = [UIColor greenColor];
     cell.selectedBackgroundView = backgroundView;
                                    
+    
     /* 今の時刻を取得する */
     NSDate *now = [NSDate date];
        
@@ -128,6 +129,8 @@
     
     
     
+    
+    NSInteger day = (indexPath.row) + 1;
     
 
     // 曜日
@@ -149,6 +152,9 @@
         UIColor *color = [UIColor colorWithRed:1.0 green:0.647 blue:0.0 alpha:1.0];
         cell.contentView.backgroundColor = color;
     }
+     
+      
+    
     return cell;
 }
 
