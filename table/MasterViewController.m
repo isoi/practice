@@ -7,8 +7,7 @@
 //
 
 #import "MasterViewController.h"
-
-#import "DetailViewController.h"
+#import <Foundation/Foundation.h>
 
 @interface MasterViewController () {
     NSMutableArray *_objects;
@@ -57,15 +56,57 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _objects.count;
+    // return _objects.count;
+    
+    /* 今の時刻を取得する */
+    
+    NSDate *now = [NSDate date];
+    
+    /* NSCalendarを取得する */
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier: NSGregorianCalendar];;
+    
+    NSInteger daysOfThisMonth = [ calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:now ].length;
+    
+    return daysOfThisMonth;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    /* 今の時刻を取得する */
+    NSDate *now = [NSDate date];
+       
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSUInteger flags;
+    NSDateComponents *comps;
+    
+    // 年・月・日を取得
+    flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+    comps = [calendar components:flags fromDate:now];
+    
+    NSInteger year = comps.year;
+    NSInteger month = comps.month;
+    NSInteger day = (indexPath.row) + 1;
+    
 
-    NSDate *object = _objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    // 曜日
+    [comps setDay:1];
+    NSDate *date = [calendar dateFromComponents:comps];
+    comps = [calendar components:NSWeekdayCalendarUnit fromDate:date];
+    NSInteger firstWeekday = [comps weekday] - 1;
+    
+    NSInteger weekday = (firstWeekday + (indexPath.row)) % 7;
+     
+      
+        cell.textLabel.text = [NSString stringWithFormat:@"%d/%d/%d(%d)", year, month, day, weekday];
+    
     return cell;
 }
 
@@ -101,13 +142,5 @@
 }
 */
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = _objects[indexPath.row];
-        [[segue destinationViewController] setDetailItem:object];
-    }
-}
 
 @end
