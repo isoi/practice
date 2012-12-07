@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MasterViewController : UITableViewController
+@property (strong, nonatomic) IBOutletCollection(UIBarButtonItem) NSArray *showCameraSheet;
 
 @end

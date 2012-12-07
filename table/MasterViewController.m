@@ -8,8 +8,6 @@
 
 #import "MasterViewController.h"
 
-#import <Foundation/Foundation.h>
-
 @interface MasterViewController () {
     NSMutableArray *_objects;
 }
@@ -20,32 +18,6 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-}
-// viewDidLoad内でUIToolbarを設定する
--(void)viewDidLoad{
-    
-    // toolbarの表示をONにする
-    [self.navigationController setToolbarHidden:NO animated:NO];
-    
-    // toolbarを黒色にする
-    self.navigationController.toolbar.tintColor = [UIColor blackColor];
-    
-    // スペーサを生成する
-    UIBarButtonItem *spacer = [[UIBarButtonItem alloc]
-                               initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                               target:nil action:nil];
-    
-    // ボタン「Hoge」を生成する
-    UIBarButtonItem *button = [[UIBarButtonItem alloc]
-                               initWithTitle:@"camera" style:UIBarButtonItemStyleBordered
-                               target:self action:@selector(hoge)];
-    
-    
-    // toolbarにボタンとラベルをセットする
-    NSArray *items =
-    [NSArray arrayWithObjects:spacer, button, spacer, spacer, nil];
-    self.toolbarItems = items;
-    
 }
 /*- (void)viewDidLoad
 {
@@ -73,6 +45,8 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }*/
+
+
 
 #pragma mark - Table View
 
@@ -145,8 +119,11 @@
     cell.textLabel.text = [NSString stringWithFormat:@"%d/%d/%d(%@)", year, month, day, youbi];
     
     
-    if(indexPath.row == today){
+    if(indexPath.row == today-1){
         UIColor *color = [UIColor colorWithRed:1.0 green:0.647 blue:0.0 alpha:1.0];
+        cell.contentView.backgroundColor = color;
+    } else {
+        UIColor *color = [UIColor whiteColor];
         cell.contentView.backgroundColor = color;
     }
     return cell;
@@ -183,6 +160,5 @@
     return YES;
 }
 */
-
 
 @end
