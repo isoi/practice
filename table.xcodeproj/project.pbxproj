@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		762B621416756A13001C5F15 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 769CD16F1671E43E0075A6FE /* Default@2x.png */; };
+		762B621516756A1F001C5F15 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 769CD1711671E4450075A6FE /* Default-568h@2x.png */; };
 		76528321167073BA00D80C98 /* CameraEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 76528320167073BA00D80C98 /* CameraEx.m */; };
 		769CD14C1671B6340075A6FE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 769CD14B1671B6330075A6FE /* AVFoundation.framework */; };
 		769CD14F1671B63E0075A6FE /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 769CD14E1671B63E0075A6FE /* CoreVideo.framework */; };
@@ -28,8 +30,8 @@
 		769CD14B1671B6330075A6FE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		769CD14E1671B63E0075A6FE /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		769CD1501671B6470075A6FE /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
-		769CD16F1671E43E0075A6FE /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		769CD1711671E4450075A6FE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		769CD16F1671E43E0075A6FE /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		769CD1711671E4450075A6FE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		76C41D63166F129C00F0F702 /* table.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = table.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76C41D67166F129C00F0F702 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		76C41D69166F129C00F0F702 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -66,8 +68,6 @@
 		76C41D58166F129C00F0F702 = {
 			isa = PBXGroup;
 			children = (
-				769CD1711671E4450075A6FE /* Default-568h@2x.png */,
-				769CD16F1671E43E0075A6FE /* Default@2x.png */,
 				76C41D6D166F129C00F0F702 /* table */,
 				76C41D66166F129C00F0F702 /* Frameworks */,
 				76C41D64166F129C00F0F702 /* Products */,
@@ -118,6 +118,8 @@
 				76C41D73166F129C00F0F702 /* main.m */,
 				76C41D75166F129C00F0F702 /* table-Prefix.pch */,
 				76C41D79166F129C00F0F702 /* Default.png */,
+				769CD16F1671E43E0075A6FE /* Default@2x.png */,
+				769CD1711671E4450075A6FE /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -176,6 +178,8 @@
 				76C41D72166F129C00F0F702 /* InfoPlist.strings in Resources */,
 				76C41D81166F129C00F0F702 /* MainStoryboard.storyboard in Resources */,
 				769CD16E1671E4370075A6FE /* Default.png in Resources */,
+				762B621416756A13001C5F15 /* Default@2x.png in Resources */,
+				762B621516756A1F001C5F15 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

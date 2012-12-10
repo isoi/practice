@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CameraEx : UIViewController <
-UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
+@interface CameraEx : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
     UIImageView* _imageView;
 }
 

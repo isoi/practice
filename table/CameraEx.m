@@ -10,30 +10,21 @@
 
 @implementation CameraEx
 
-//イメージビュー生成
-//- (void)actionSheet:(UIActionSheet*)actionSheet
-//clickedButtonAtIndex:(NSInteger)buttonIndex
+// create imageView
 -(void)viewDidLoad
 {
-    
-    // ソースタイプを決定する
     UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
-    
-    NSLog(@"check!");
-    
-    // 使用可能かどうかチェックする
+        
     if (![UIImagePickerController isSourceTypeAvailable:sourceType]) {
         return;
     }
     
-    // イメージピッカーを作る
-    UIImagePickerController*    imagePicker;
-    imagePicker = [[UIImagePickerController alloc] init];
+    // create imagePicker
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.sourceType = sourceType;
     imagePicker.allowsEditing = YES;
     imagePicker.delegate = self;
     
-    // イメージピッカーを表示する
     [self presentModalViewController:imagePicker animated:YES];
 }
 
