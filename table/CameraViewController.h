@@ -1,5 +1,5 @@
 //
-//  CameraEx.h
+//  CameraViewController.h
 //  table
 //
 //  Created by 礒井 友香 on 2012/12/06.
@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CameraEx : UIViewController <
-UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
+@interface CameraViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+{
     UIImageView* _imageView;
 }
 
